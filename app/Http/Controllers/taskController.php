@@ -13,11 +13,11 @@ class taskController extends Controller
      */
     public function index()
     {
-        Mail::raw('Testando via controller', function($mensagem){
-            $mensagem->to('teste@example.com');
-            $mensagem->subject('Testando subject');
-        });
-        return true;
+        // Mail::raw('Testando via controller', function($mensagem){
+        //     $mensagem->to('teste@example.com');
+        //     $mensagem->subject('Testando subject');
+        // });
+        return view('task.create');
     }
 
     /**
