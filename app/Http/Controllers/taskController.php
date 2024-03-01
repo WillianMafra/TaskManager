@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\newTaskMail;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -33,7 +34,25 @@ class taskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $rulesValidation = [
+            'task_name' => 'min:4'
+        ];
+        // Validating the task data
+        $request->validate($rulesValidation);
+
+        // Storing the data on the DB
+
+        $newTask = new Task();
+        $newTask->task_name = $request->get('task_name');
+        $newTask->date = $request->get('date');
+        $newTask->save();
+
+        // Send email telling that a new task was created
+        $userEmail = auth()->user()->email;
+        Mail::to($userEmail)->send(new newTaskMail($newTask));
+
+        return redirect()->route('dashboard');
     }
 
     /**
@@ -65,6 +84,8 @@ class taskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+        $task->delete();
+        $task->save();
+        return redirect()->route('dashboard');
     }
 }
