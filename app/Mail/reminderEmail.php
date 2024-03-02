@@ -2,19 +2,19 @@
 
 namespace App\Mail;
 
+use App\Models\Task;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Task;
 
-class newTaskMail extends Mailable
+class reminderEmail extends Mailable
 {
     use Queueable, SerializesModels;
     public $taskName;
-    public $deadlineDate;
+    public $remaingTime;
     public $url;
     public $userName;
     /**
@@ -23,9 +23,23 @@ class newTaskMail extends Mailable
     public function __construct(Task $task)
     {
         $this->taskName = $task->task_name;
-        $this->deadlineDate = date('d/m/Y h:i', strtotime($task->date));
         $this->url = 'http://localhost/task/'.$task->id;
         $this->userName = $task->user->name;
+
+        switch ($task->reminder_time){
+            case '30':
+                $this->remaingTime = ' 30 minutes!';
+                break;
+            case '60':
+                $this->remaingTime = ' 1 hour!';
+                break;
+            case '720':
+                $this->remaingTime = ' 12 hour!';
+                break;
+            case '1440':
+                $this->remaingTime = ' 1 day!';
+                break;
+        }
     }
 
     /**
@@ -34,7 +48,7 @@ class newTaskMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'New Task Created',
+            subject: 'Do not forget your task!',
         );
     }
 
@@ -44,7 +58,7 @@ class newTaskMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.new-task',
+            markdown: 'emails.reminder-email',
         );
     }
 
