@@ -2,30 +2,34 @@
 
 namespace App\Mail;
 
+use App\Models\Task;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Task;
 
-class newTaskMail extends Mailable
+class updateTaskMail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $taskName;
-    public $deadlineDate;
+    public $newTaskName;
+    public $oldTaskName;
+    public $oldDeadlineDate;
+    public $newDeadlineDate;
     public $url;
     public $userName;
     /**
      * Create a new message instance.
      */
-    public function __construct(Task $task)
+    public function __construct(Task $oldTask, $newTask)
     {
-        $this->taskName = $task->task_name;
-        $this->deadlineDate = date('d/m/Y h:i', strtotime($task->date));
-        $this->url = 'http://localhost/task/'.$task->id;
-        $this->userName = $task->user->name;
+        $this->newTaskName = $newTask->task_name;
+        $this->oldTaskName = $oldTask->task_name;
+        $this->newDeadlineDate = date('d/m/Y h:i', strtotime($newTask->date));
+        $this->oldDeadlineDate = date('d/m/Y h:i', strtotime($oldTask->date));
+        $this->url = 'http://localhost/task/'.$oldTask->id;
+        $this->userName = $oldTask->user->name;
     }
 
     /**
@@ -34,7 +38,7 @@ class newTaskMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'New Task Created',
+            subject: 'Task Updated!',
         );
     }
 
@@ -44,7 +48,7 @@ class newTaskMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.new-task',
+            markdown: 'emails.update-task',
         );
     }
 
