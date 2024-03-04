@@ -23,7 +23,7 @@ class newTaskMail extends Mailable
     public function __construct(Task $task)
     {
         $this->taskName = $task->task_name;
-        $this->deadlineDate = date('d/m/Y h:i', strtotime($task->date));
+        $this->deadlineDate = date('d/m/Y h:i A', strtotime($task->date));
         $this->url = 'http://localhost/task/'.$task->id;
         $this->userName = $task->user->name;
     }

@@ -47,7 +47,7 @@
                                             {{ $task->task_name }}
                                         </th>
                                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ date('d/m/Y h:i', strtotime($task->date)) }}
+                                            {{ date('d/m/Y h:i A', strtotime($task->date)) }}
                                         </th>
                                         <th scope="row"  class="px-6 py-4 justify-end font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             <a style="display: inline-block" href="{{route('task.show', $task)}}">

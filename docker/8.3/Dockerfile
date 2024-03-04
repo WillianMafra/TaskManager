@@ -59,6 +59,12 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY php.ini /etc/php/8.3/cli/conf.d/99-sail.ini
 RUN chmod +x /usr/local/bin/start-container
 
+RUN apt-get update && apt-get install -y cron
+COPY crontab /etc/cron.d/crontab
+RUN chmod 0644 /etc/cron.d/crontab \
+    && crontab /etc/cron.d/crontab \
+    && touch /var/log/cron.log
+
 EXPOSE 8000
 
 ENTRYPOINT ["start-container"]

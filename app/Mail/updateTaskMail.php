@@ -26,8 +26,8 @@ class updateTaskMail extends Mailable
     {
         $this->newTaskName = $newTask->task_name;
         $this->oldTaskName = $oldTask->task_name;
-        $this->newDeadlineDate = date('d/m/Y h:i', strtotime($newTask->date));
-        $this->oldDeadlineDate = date('d/m/Y h:i', strtotime($oldTask->date));
+        $this->newDeadlineDate = date('d/m/Y h:i A', strtotime($newTask->date));
+        $this->oldDeadlineDate = date('d/m/Y h:i A', strtotime($oldTask->date));
         $this->url = 'http://localhost/task/'.$oldTask->id;
         $this->userName = $oldTask->user->name;
     }

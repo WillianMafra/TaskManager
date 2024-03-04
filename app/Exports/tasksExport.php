@@ -31,7 +31,7 @@ class tasksExport implements FromCollection, WithHeadings, WithMapping
         return [
             $line->id,
             $line->task_name,
-            date('d/m/Y h:i', strtotime($line->date))
+            date('d/m/Y h:i A', strtotime($line->date))
         ];
     }
 }
