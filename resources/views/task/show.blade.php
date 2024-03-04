@@ -28,7 +28,7 @@
                         <!-- Reminder time -->
                         <div class="mt-4">
                             <x-input-label for="reminder_time" :value="'Need a reminder?'" />
-                            <select name="reminder_time" id="reminder_time">
+                            <select class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full" name="reminder_time" id="reminder_time">
                                 @foreach ($remind_times as $key => $value)
                                 <option value="{{$key}}" {{ $key == $task->reminder_time ? 'selected' : '' }}>{{$value}}</option>
                                 @endforeach    
