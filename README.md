@@ -1,5 +1,6 @@
 # Task Manager    
-### 📝 Task manager is a web application to create tasks. When you create, update or when the deadline date of each task is close, you receive a e-mail. 
+### 📝 Task manager is a web application to create tasks. When you create, update or when the deadline date of each task is close, you receive a e-mail.  
+### If you are a excel lover, you can create task in the application and export to xlsx or csv. 
 <img src="home.png" alt="super-gestao">
 
 ## 🛠️ Made with Laravel, Composer, NPM, PHP, Postgres, MailPit and Docker
