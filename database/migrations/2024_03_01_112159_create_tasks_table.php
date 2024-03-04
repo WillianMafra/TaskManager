@@ -13,9 +13,13 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('task_name', 50);
             $table->dateTime('date');
+            $table->integer('reminder_time')->nullable();
+            $table->boolean('reminder_email_sent')->nullable();
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -24,6 +28,9 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('tasks', function(Blueprint $table){
+            $table->dropForeign('tasks_user_id_foreign');
+        });
         Schema::dropIfExists('tasks');
     }
 };

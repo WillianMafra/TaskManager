@@ -13,9 +13,13 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        Tasks
+                    </x-nav-link>
+                    <x-nav-link :href="route('task.index')" :active="request()->routeIs('task.index')">
+                        Create Task
                     </x-nav-link>
                 </div>
+                
             </div>
 
             <!-- Settings Dropdown -->

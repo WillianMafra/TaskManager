@@ -1,8 +1,6 @@
 <x-mail::message>
-# {{ $taskName }}
-Hi, {{ $userName }} a new task was create on your profile!
-
-Deadline for completion: {{ $deadlineDate }}
+# Hi, {{ $userName }}, I'm here to remind you about your task!
+The task {{ $taskName }} starts in {{ $remaingTime }}
 
 <x-mail::button :url="$url">
 See task
