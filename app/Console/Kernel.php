@@ -14,11 +14,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // Verify task every minute
-        // $schedule->command(sendReminderEmail::class, ['Taylor', '--force'])->everyMinute();
-        // $schedule->call(function () {
-        //     \Illuminate\Support\Facades\Artisan::call('app:send-reminder-email');
-        // })->everyMinute();
-        $schedule->command('app:send-reminder-email')->everyMinute();
+        $schedule->command('app:send-reminder-email')
+         ->everyMinute();
     }
 
     /**

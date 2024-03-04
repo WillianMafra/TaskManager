@@ -48,7 +48,7 @@ class sendReminderEmail extends Command
             $task->save();
         }
 
-        if(empty($task)){
+        if(empty($tasks)){
             $this->info('There is no task to remind!');
         } else 
         {
