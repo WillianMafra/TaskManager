@@ -16,7 +16,7 @@
 1. Clone this repository
    
 ```bash
-    git clone https://github.com/WillianMafra/Super-Gestao.git
+    git clone https://github.com/WillianMafra/TaskManager.git
 ```
 
 2. Access the project directory.
